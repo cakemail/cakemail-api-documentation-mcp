@@ -1,71 +1,101 @@
 #!/usr/bin/env node
 
 /**
- * NPM wrapper for Cakemail MCP Server
+ * NPM wrapper for Cakemail API Documentation MCP Server
  *
- * This wrapper checks for Python/uvx and runs the actual Python-based MCP server.
+ * This package wraps the Python implementation which must be installed separately.
+ * For now, this runs the local Python implementation directly.
  */
 
 const { spawn } = require('child_process');
 const { platform } = require('os');
+const path = require('path');
+const fs = require('fs');
 
-// Check if uvx is available
-function hasUvx() {
-  return new Promise((resolve) => {
-    const check = spawn('uvx', ['--version']);
-    check.on('error', () => resolve(false));
-    check.on('exit', (code) => resolve(code === 0));
-  });
+// Try to find local installation first
+function findLocalInstall() {
+  const possiblePaths = [
+    path.join(__dirname, '..', 'src', 'cakemail_mcp', '__main__.py'),
+    path.join(process.cwd(), 'src', 'cakemail_mcp', '__main__.py'),
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      return path.dirname(path.dirname(p));
+    }
+  }
+  return null;
 }
 
-// Check if Python is available
-function hasPython() {
+// Check if uvx is available
+function hasCommand(cmd) {
   return new Promise((resolve) => {
-    const pythonCmd = platform() === 'win32' ? 'python' : 'python3';
-    const check = spawn(pythonCmd, ['--version']);
+    const check = spawn(cmd, ['--version'], { shell: true });
     check.on('error', () => resolve(false));
     check.on('exit', (code) => resolve(code === 0));
   });
 }
 
 async function main() {
-  // Try uvx first (recommended)
-  if (await hasUvx()) {
-    console.error('Starting Cakemail MCP Server via uvx...');
-    const server = spawn('uvx', ['cakemail-mcp-server', ...process.argv.slice(2)], {
+  const args = process.argv.slice(2);
+
+  // Try local development installation first
+  const localPath = findLocalInstall();
+  if (localPath) {
+    console.error('Running from local development installation...');
+    const pythonCmd = platform() === 'win32' ? 'python' : 'python3';
+    const server = spawn(pythonCmd, ['-m', 'cakemail_mcp', ...args], {
+      stdio: 'inherit',
+      shell: platform() === 'win32',
+      cwd: localPath
+    });
+    server.on('exit', (code) => process.exit(code || 0));
+    return;
+  }
+
+  // Try uvx (if package is published to PyPI)
+  if (await hasCommand('uvx')) {
+    console.error('Starting via uvx...');
+    const server = spawn('uvx', ['cakemail-mcp-server', ...args], {
       stdio: 'inherit',
       shell: platform() === 'win32'
+    });
+
+    server.on('error', async (err) => {
+      console.error('\n❌ Error: Package not found on PyPI yet.');
+      console.error('\nThe Python package "cakemail-mcp-server" has not been published to PyPI yet.');
+      console.error('\nFor now, please install from source:');
+      console.error('  git clone https://github.com/cakemail/cakemail-api-documentation-mcp.git');
+      console.error('  cd cakemail-api-documentation-mcp');
+      console.error('  pip install -e .');
+      process.exit(1);
     });
 
     server.on('exit', (code) => process.exit(code || 0));
     return;
   }
 
-  // Try pipx as fallback
-  console.error('uvx not found, attempting pipx...');
-  const pipxServer = spawn('pipx', ['run', 'cakemail-mcp-server', ...process.argv.slice(2)], {
-    stdio: 'inherit',
-    shell: platform() === 'win32'
-  });
+  // Try system Python installation
+  if (await hasCommand('cakemail-mcp-server')) {
+    console.error('Starting from system installation...');
+    const server = spawn('cakemail-mcp-server', args, {
+      stdio: 'inherit',
+      shell: platform() === 'win32'
+    });
+    server.on('exit', (code) => process.exit(code || 0));
+    return;
+  }
 
-  pipxServer.on('error', async () => {
-    // If pipx fails, check for Python and suggest installation
-    if (await hasPython()) {
-      console.error('\n❌ Error: Neither uvx nor pipx is installed.');
-      console.error('\nPlease install uv (recommended):');
-      console.error('  curl -LsSf https://astral.sh/uv/install.sh | sh');
-      console.error('\nOr install the Python package directly:');
-      console.error('  pip install cakemail-mcp-server');
-      console.error('  cakemail-mcp-server');
-    } else {
-      console.error('\n❌ Error: Python 3.11+ is required but not found.');
-      console.error('\nPlease install Python 3.11 or higher:');
-      console.error('  https://www.python.org/downloads/');
-    }
-    process.exit(1);
-  });
-
-  pipxServer.on('exit', (code) => process.exit(code || 0));
+  // Nothing worked
+  console.error('\n❌ Error: Cakemail MCP Server not found.');
+  console.error('\nThe Python package is not yet published to PyPI.');
+  console.error('\nPlease install from source:');
+  console.error('  git clone https://github.com/cakemail/cakemail-api-documentation-mcp.git');
+  console.error('  cd cakemail-api-documentation-mcp');
+  console.error('  pip install -e .');
+  console.error('\nOr install uv and wait for PyPI publication:');
+  console.error('  curl -LsSf https://astral.sh/uv/install.sh | sh');
+  process.exit(1);
 }
 
 main().catch((err) => {
