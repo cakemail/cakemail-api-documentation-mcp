@@ -1,6 +1,6 @@
 {
   "name": "cakemail-api-documentation-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server exposing Cakemail API documentation to AI agents",
   "keywords": [
     "mcp",
