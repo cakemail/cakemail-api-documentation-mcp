@@ -21,7 +21,7 @@ The Cakemail API MCP Server provides AI coding assistants (Claude, Cursor, GitHu
 
 ```bash
 # Using npx (works for everyone!)
-claude mcp add cakemail-api-docs -- npx cakemail-api-documentation-mcp
+claude mcp add cakemail-api-docs -- npx cakemail-api-docs
 
 # Or using uvx (Python developers)
 claude mcp add cakemail-api-docs -- uvx cakemail-mcp-server
@@ -33,8 +33,8 @@ That's it! No manual configuration needed.
 
 **Method 1: Using npm**
 ```bash
-npm install -g cakemail-api-documentation-mcp
-claude mcp add cakemail-api-docs cakemail-api-documentation-mcp
+npm install -g cakemail-api-docs
+claude mcp add cakemail-api-docs cakemail-api-docs
 ```
 
 **Method 2: Using pip**

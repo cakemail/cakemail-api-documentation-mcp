@@ -8,14 +8,14 @@
 
 ```bash
 # Option 1: Using npx (recommended - works for everyone!)
-claude mcp add cakemail-api-docs -- npx cakemail-api-documentation-mcp
+claude mcp add cakemail-api-docs -- npx cakemail-api-docs
 
 # Option 2: Using uvx (Python developers)
 claude mcp add cakemail-api-docs -- uvx cakemail-mcp-server
 
 # Option 3: After npm install
-npm install -g cakemail-api-documentation-mcp
-claude mcp add cakemail-api-docs cakemail-api-documentation-mcp
+npm install -g cakemail-api-docs
+claude mcp add cakemail-api-docs cakemail-api-docs
 
 # Option 4: After pip install
 pip install cakemail-mcp-server
@@ -134,7 +134,7 @@ uv pip install -e ".[dev]"
 ### After PyPI - Method 1: `claude mcp add` ⭐
 **One command:**
 ```bash
-claude mcp add cakemail-api-docs -- npx cakemail-api-documentation-mcp
+claude mcp add cakemail-api-docs -- npx cakemail-api-docs
 ```
 Done! No config file editing needed.
 
@@ -152,13 +152,13 @@ pip install cakemail-mcp-server
   "mcpServers": {
     "cakemail-api-docs": {
       "command": "npx",
-      "args": ["cakemail-api-documentation-mcp"]
+      "args": ["cakemail-api-docs"]
     }
   }
 }
 ```
 
-**Recommendation:** Use `claude mcp add cakemail-api-docs -- npx cakemail-api-documentation-mcp` for the simplest experience!
+**Recommendation:** Use `claude mcp add cakemail-api-docs -- npx cakemail-api-docs` for the simplest experience!
 
 ---
 

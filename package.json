@@ -1,6 +1,6 @@
 {
-  "name": "cakemail-api-documentation-mcp",
-  "version": "0.1.1",
+  "name": "cakemail-api-docs",
+  "version": "0.2.0",
   "description": "MCP server exposing Cakemail API documentation to AI agents",
   "keywords": [
     "mcp",
@@ -25,7 +25,7 @@
     "url": "https://github.com/cakemail/cakemail-api-documentation-mcp/issues"
   },
   "bin": {
-    "cakemail-api-documentation-mcp": "bin/cakemail-mcp-server.js"
+    "cakemail-api-docs": "bin/cakemail-mcp-server.js"
   },
   "files": [
     "bin/"
