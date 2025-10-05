@@ -18,11 +18,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cakemail/cakemail-mcp-server.git"
+    "url": "https://github.com/cakemail/cakemail-api-documentation-mcp.git"
   },
-  "homepage": "https://github.com/cakemail/cakemail-mcp-server#readme",
+  "homepage": "https://github.com/cakemail/cakemail-api-documentation-mcp#readme",
   "bugs": {
-    "url": "https://github.com/cakemail/cakemail-mcp-server/issues"
+    "url": "https://github.com/cakemail/cakemail-api-documentation-mcp/issues"
   },
   "bin": {
     "cakemail-mcp-server": "./bin/cakemail-mcp-server.js"

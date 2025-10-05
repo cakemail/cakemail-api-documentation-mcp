@@ -42,10 +42,10 @@ dev = [
 cakemail-mcp-server = "cakemail_mcp.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/cakemail/cakemail-mcp-server"
-Documentation = "https://github.com/cakemail/cakemail-mcp-server#readme"
-Repository = "https://github.com/cakemail/cakemail-mcp-server"
-Issues = "https://github.com/cakemail/cakemail-mcp-server/issues"
+Homepage = "https://github.com/cakemail/cakemail-api-documentation-mcp"
+Documentation = "https://github.com/cakemail/cakemail-api-documentation-mcp#readme"
+Repository = "https://github.com/cakemail/cakemail-api-documentation-mcp"
+Issues = "https://github.com/cakemail/cakemail-api-documentation-mcp/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cakemail_mcp"]
