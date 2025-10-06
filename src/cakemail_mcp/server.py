@@ -28,7 +28,7 @@ class CakemailMCPServer:
         self.config = get_config()
         self.openapi_repo = OpenAPIRepository(self.config.openapi_spec_path)
 
-        # Load OpenAPI spec and create MCP server from it
+        # Load OpenAPI spec
         try:
             openapi_spec = self.openapi_repo.load()
 
@@ -42,11 +42,10 @@ class CakemailMCPServer:
                 follow_redirects=True,
             )
 
-            # Create FastMCP server from OpenAPI spec
-            self.mcp = FastMCP.from_openapi(
-                openapi_spec=openapi_spec,
-                client=self.http_client,
-                name="Cakemail API MCP Server",
+            # Create lightweight FastMCP server (no auto-generated tools)
+            self.mcp = FastMCP(
+                name="Cakemail API",
+                version=__version__,
             )
 
             logger.info(
@@ -62,6 +61,7 @@ class CakemailMCPServer:
         self._register_endpoint_discovery_tool()
         self._register_endpoint_detail_tool()
         self._register_auth_documentation_tool()
+        self._register_api_call_tool()
 
         self._setup_signal_handlers()
 
@@ -344,6 +344,105 @@ class CakemailMCPServer:
                 "schemes": schemes,
                 "baseUrl": self._get_base_url_from_spec(spec),
             }
+
+    def _register_api_call_tool(self) -> None:
+        """Register API call execution MCP tool."""
+
+        @self.mcp.tool()
+        async def cakemail_call_api(
+            path: str,
+            method: str,
+            headers: dict[str, str] | None = None,
+            query_params: dict[str, Any] | None = None,
+            body: dict[str, Any] | None = None,
+        ) -> dict[str, Any]:
+            """Execute a Cakemail API call.
+
+            Args:
+                path: API endpoint path (e.g., "/campaigns/{id}"). Use actual values for path parameters.
+                method: HTTP method (GET, POST, PUT, PATCH, DELETE)
+                headers: Optional HTTP headers (e.g., {"Authorization": "Bearer token"})
+                query_params: Optional query parameters
+                body: Optional request body for POST/PUT/PATCH requests
+
+            Returns:
+                API response with status, headers, and body
+
+            Example:
+                cakemail_call_api(
+                    path="/campaigns/123",
+                    method="GET",
+                    headers={"Authorization": "Bearer YOUR_TOKEN"}
+                )
+            """
+            # Validate inputs
+            if not path:
+                return create_error_response(
+                    "Path parameter is required",
+                    MCPError.MISSING_PARAMETER,
+                    {"parameter": "path"},
+                )
+
+            if not method:
+                return create_error_response(
+                    "Method parameter is required",
+                    MCPError.MISSING_PARAMETER,
+                    {"parameter": "method"},
+                )
+
+            method = method.upper()
+            if method not in ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]:
+                return create_error_response(
+                    f"Invalid HTTP method: {method}",
+                    MCPError.MISSING_PARAMETER,
+                    {"validMethods": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]},
+                )
+
+            try:
+                # Prepare request
+                request_headers = headers or {}
+                request_params = query_params or {}
+                request_body = body
+
+                # Make the API call
+                response = await self.http_client.request(
+                    method=method,
+                    url=path,
+                    headers=request_headers,
+                    params=request_params,
+                    json=request_body if request_body else None,
+                )
+
+                # Parse response
+                response_body = None
+                try:
+                    response_body = response.json()
+                except Exception:
+                    # Not JSON, return as text
+                    response_body = response.text
+
+                return {
+                    "success": True,
+                    "status": response.status_code,
+                    "statusText": response.reason_phrase,
+                    "headers": dict(response.headers),
+                    "body": response_body,
+                }
+
+            except httpx.HTTPStatusError as e:
+                return {
+                    "success": False,
+                    "status": e.response.status_code,
+                    "statusText": e.response.reason_phrase,
+                    "error": str(e),
+                    "body": e.response.text,
+                }
+            except Exception as e:
+                return create_error_response(
+                    f"API call failed: {str(e)}",
+                    MCPError.SPEC_LOAD_ERROR,
+                    {"path": path, "method": method, "error": str(e)},
+                )
 
     def _setup_signal_handlers(self) -> None:
         """Set up graceful shutdown on SIGINT and SIGTERM."""

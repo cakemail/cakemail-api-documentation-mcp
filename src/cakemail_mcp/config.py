@@ -49,7 +49,13 @@ def get_config() -> Config:
     Raises:
         ValueError: If required configuration is missing or invalid
     """
-    openapi_spec_path = os.getenv("OPENAPI_SPEC_PATH", "./openapi.json")
+    # If user provided custom path, use it; otherwise use package-bundled file
+    openapi_spec_path = os.getenv("OPENAPI_SPEC_PATH")
+    if openapi_spec_path is None:
+        # Default to package-bundled openapi.json
+        package_dir = Path(__file__).parent
+        openapi_spec_path = str(package_dir / "openapi.json")
+
     log_level = os.getenv("LOG_LEVEL", "INFO")
 
     return Config(
