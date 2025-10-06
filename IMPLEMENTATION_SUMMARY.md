@@ -25,7 +25,7 @@ All 5 stories successfully implemented:
 - Stdio transport for MCP communication
 - Signal handlers for graceful shutdown (SIGINT/SIGTERM)
 - Configurable logging via environment variables
-- Entry points: `python -m cakemail_mcp` and `cakemail-mcp-server` command
+- Entry points: `python -m cakemail_mcp` and `cakemail-api-docs-mcp` command
 - **Result:** Fully functional MCP server
 
 #### Story 1.3: OpenAPI Specification Loading ✅
@@ -150,8 +150,8 @@ tests/
 
 ```bash
 # Install from source
-git clone https://github.com/cakemail/cakemail-mcp-server.git
-cd cakemail-mcp-server
+git clone https://github.com/cakemail/cakemail-api-docs-mcp.git
+cd cakemail-api-docs-mcp
 uv pip install -e ".[dev]"
 ```
 
@@ -162,7 +162,7 @@ uv pip install -e ".[dev]"
 python -m cakemail_mcp
 
 # Or using the installed command
-cakemail-mcp-server
+cakemail-api-docs-mcp
 ```
 
 ### Configuration
@@ -182,7 +182,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "/path/to/openapi.json"
       }
@@ -262,7 +262,7 @@ MIT License - See LICENSE file for details
 
 ## Links
 
-- Repository: https://github.com/cakemail/cakemail-mcp-server
+- Repository: https://github.com/cakemail/cakemail-api-docs-mcp
 - FastMCP Docs: https://gofastmcp.com
 - Cakemail API: https://docs.cakemail.com
 - MCP Protocol: https://modelcontextprotocol.io

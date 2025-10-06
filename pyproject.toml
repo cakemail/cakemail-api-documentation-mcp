@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "cakemail-mcp-server"
+name = "cakemail-api-docs-mcp"
 version = "0.1.0"
 description = "MCP server exposing Cakemail API documentation to AI agents"
 readme = "README.md"
@@ -39,7 +39,7 @@ dev = [
 ]
 
 [project.scripts]
-cakemail-mcp-server = "cakemail_mcp.__main__:main"
+cakemail-api-docs-mcp = "cakemail_mcp.__main__:main"
 
 [project.urls]
 Homepage = "https://github.com/cakemail/cakemail-api-documentation-mcp"

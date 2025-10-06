@@ -24,7 +24,7 @@ def main() -> None:
     """Main entry point for the MCP server."""
     # Handle --version flag
     if len(sys.argv) > 1 and sys.argv[1] in ["--version", "-v"]:
-        print(f"cakemail-mcp-server {__version__}")
+        print(f"cakemail-api-docs-mcp {__version__}")
         sys.exit(0)
 
     # Handle --help flag
@@ -33,15 +33,15 @@ def main() -> None:
         print(f"Version: {__version__}")
         print()
         print("Usage:")
-        print("  cakemail-mcp-server              Start the MCP server")
-        print("  cakemail-mcp-server --version    Show version")
-        print("  cakemail-mcp-server --help       Show this help")
+        print("  cakemail-api-docs-mcp              Start the MCP server")
+        print("  cakemail-api-docs-mcp --version    Show version")
+        print("  cakemail-api-docs-mcp --help       Show this help")
         print()
         print("Environment Variables:")
         print("  OPENAPI_SPEC_PATH   Path or URL to OpenAPI spec (default: ./openapi.json)")
         print("  LOG_LEVEL           Logging level (default: INFO)")
         print()
-        print("Documentation: https://github.com/cakemail/cakemail-mcp-server")
+        print("Documentation: https://github.com/cakemail/cakemail-api-docs-mcp")
         sys.exit(0)
 
     setup_logging()

@@ -30,7 +30,7 @@ The Cakemail MCP Server is **complete and ready for publication**. This project 
 
 ## 📦 Package Details
 
-**Name**: `cakemail-mcp-server`
+**Name**: `cakemail-api-docs-mcp`
 **Version**: `0.1.0`
 **Python**: `>=3.11`
 **License**: MIT
@@ -44,12 +44,12 @@ The Cakemail MCP Server is **complete and ready for publication**. This project 
 
 ### Easiest Method
 ```bash
-claude mcp add cakemail -- uvx cakemail-mcp-server
+claude mcp add cakemail -- uvx cakemail-api-docs-mcp
 ```
 
 ### Traditional Method
 ```bash
-pip install cakemail-mcp-server
+pip install cakemail-api-docs-mcp
 ```
 
 ## 📊 Implementation Status
@@ -272,7 +272,7 @@ Once published, developers can use it like this:
 
 ```bash
 # Install
-claude mcp add cakemail -- uvx cakemail-mcp-server
+claude mcp add cakemail -- uvx cakemail-api-docs-mcp
 
 # Use with Claude
 ```
@@ -299,8 +299,8 @@ Claude: [Uses cakemail_list_endpoints to find the endpoint]
 
 ## 📞 Support & Contact
 
-- **Repository**: https://github.com/cakemail/cakemail-mcp-server
-- **Issues**: https://github.com/cakemail/cakemail-mcp-server/issues
+- **Repository**: https://github.com/cakemail/cakemail-api-docs-mcp
+- **Issues**: https://github.com/cakemail/cakemail-api-docs-mcp/issues
 - **Documentation**: See README.md and guides
 - **Email**: support@cakemail.com
 

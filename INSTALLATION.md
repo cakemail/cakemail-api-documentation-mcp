@@ -11,15 +11,15 @@
 claude mcp add cakemail-api-docs -- npx cakemail-api-docs
 
 # Option 2: Using uvx (Python developers)
-claude mcp add cakemail-api-docs -- uvx cakemail-mcp-server
+claude mcp add cakemail-api-docs -- uvx cakemail-api-docs-mcp
 
 # Option 3: After npm install
 npm install -g cakemail-api-docs
 claude mcp add cakemail-api-docs cakemail-api-docs
 
 # Option 4: After pip install
-pip install cakemail-mcp-server
-claude mcp add cakemail-api-docs cakemail-mcp-server
+pip install cakemail-api-docs-mcp
+claude mcp add cakemail-api-docs cakemail-api-docs-mcp
 ```
 
 That's it! The `claude mcp add` command automatically:
@@ -29,7 +29,7 @@ That's it! The `claude mcp add` command automatically:
 
 **To use a custom OpenAPI spec:**
 ```bash
-claude mcp add cakemail -- env OPENAPI_SPEC_PATH=/path/to/openapi.json uvx cakemail-mcp-server
+claude mcp add cakemail -- env OPENAPI_SPEC_PATH=/path/to/openapi.json uvx cakemail-api-docs-mcp
 ```
 
 ### Alternative: Manual Installation
@@ -38,10 +38,10 @@ claude mcp add cakemail -- env OPENAPI_SPEC_PATH=/path/to/openapi.json uvx cakem
 
 ```bash
 # Install from PyPI
-pip install cakemail-mcp-server
+pip install cakemail-api-docs-mcp
 
 # Or with pipx (recommended for CLI tools)
-pipx install cakemail-mcp-server
+pipx install cakemail-api-docs-mcp
 ```
 
 **Step 2: Configure Claude Desktop**
@@ -52,7 +52,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
       }
@@ -70,7 +70,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "cakemail": {
       "command": "uvx",
-      "args": ["cakemail-mcp-server"],
+      "args": ["cakemail-api-docs-mcp"],
       "env": {
         "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
       }
@@ -89,8 +89,8 @@ With `uvx`, you don't even need to install - it downloads and runs automatically
 
 ```bash
 # Clone the repository
-git clone https://github.com/cakemail/cakemail-mcp-server.git
-cd cakemail-mcp-server
+git clone https://github.com/cakemail/cakemail-api-docs-mcp.git
+cd cakemail-api-docs-mcp
 
 # Install in development mode
 uv pip install -e ".[dev]"
@@ -106,13 +106,13 @@ uv pip install -e ".[dev]"
       "args": [
         "run",
         "--directory",
-        "/path/to/cakemail-mcp-server",
+        "/path/to/cakemail-api-docs-mcp",
         "python",
         "-m",
         "cakemail_mcp"
       ],
       "env": {
-        "OPENAPI_SPEC_PATH": "/path/to/cakemail-mcp-server/openapi.json",
+        "OPENAPI_SPEC_PATH": "/path/to/cakemail-api-docs-mcp/openapi.json",
         "LOG_LEVEL": "DEBUG"
       }
     }
@@ -141,7 +141,7 @@ Done! No config file editing needed.
 ### After PyPI - Method 2: Manual
 **Traditional approach:**
 ```bash
-pip install cakemail-mcp-server
+pip install cakemail-api-docs-mcp
 # Then add to config file
 ```
 
@@ -177,7 +177,7 @@ pip install cakemail-mcp-server
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "/path/to/custom/openapi.json"
       }
@@ -192,7 +192,7 @@ pip install cakemail-mcp-server
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
       }
@@ -209,10 +209,10 @@ After installation, verify it works:
 
 ```bash
 # Test the command
-cakemail-mcp-server --version
+cakemail-api-docs-mcp --version
 
 # Run the server manually (Ctrl+C to stop)
-cakemail-mcp-server
+cakemail-api-docs-mcp
 ```
 
 In Claude Desktop, you should see a 🔌 icon when connected.
@@ -223,10 +223,10 @@ In Claude Desktop, you should see a 🔌 icon when connected.
 
 ```bash
 # If installed with pip
-pip uninstall cakemail-mcp-server
+pip uninstall cakemail-api-docs-mcp
 
 # If installed with pipx
-pipx uninstall cakemail-mcp-server
+pipx uninstall cakemail-api-docs-mcp
 ```
 
 Then remove the configuration from `claude_desktop_config.json`.
@@ -243,11 +243,11 @@ Then remove the configuration from `claude_desktop_config.json`.
 
 ## Troubleshooting
 
-### Command not found: cakemail-mcp-server
+### Command not found: cakemail-api-docs-mcp
 
 Make sure the package is installed:
 ```bash
-pip list | grep cakemail-mcp-server
+pip list | grep cakemail-api-docs-mcp
 ```
 
 If using pipx, ensure pipx is in your PATH:

@@ -56,29 +56,31 @@ async function main() {
   // Try uvx (if package is published to PyPI)
   if (await hasCommand('uvx')) {
     console.error('Starting via uvx...');
-    const server = spawn('uvx', ['cakemail-mcp-server', ...args], {
+    const server = spawn('uvx', ['cakemail-api-docs-mcp', ...args], {
       stdio: 'inherit',
       shell: platform() === 'win32'
     });
 
-    server.on('error', async (err) => {
-      console.error('\n❌ Error: Package not found on PyPI yet.');
-      console.error('\nThe Python package "cakemail-mcp-server" has not been published to PyPI yet.');
-      console.error('\nFor now, please install from source:');
-      console.error('  git clone https://github.com/cakemail/cakemail-api-documentation-mcp.git');
-      console.error('  cd cakemail-api-documentation-mcp');
-      console.error('  pip install -e .');
-      process.exit(1);
+    server.on('exit', (code) => {
+      if (code !== 0) {
+        console.error('\n❌ Error: Package not found on PyPI yet.');
+        console.error('\nThe Python package "cakemail-api-docs-mcp" has not been published to PyPI yet.');
+        console.error('\nFor now, please install from source:');
+        console.error('  git clone https://github.com/cakemail/cakemail-api-documentation-mcp.git');
+        console.error('  cd cakemail-api-documentation-mcp');
+        console.error('  pip install -e .');
+        console.error('\nThen configure Claude to use the local installation:');
+        console.error('  See INSTALLATION.md for details');
+      }
+      process.exit(code || 0);
     });
-
-    server.on('exit', (code) => process.exit(code || 0));
     return;
   }
 
   // Try system Python installation
-  if (await hasCommand('cakemail-mcp-server')) {
+  if (await hasCommand('cakemail-api-docs-mcp')) {
     console.error('Starting from system installation...');
-    const server = spawn('cakemail-mcp-server', args, {
+    const server = spawn('cakemail-api-docs-mcp', args, {
       stdio: 'inherit',
       shell: platform() === 'win32'
     });

@@ -141,7 +141,7 @@ This is the **DEFINITIVE** technology selection for the Cakemail API MCP Server.
 | **Linter** | ruff | 0.2.0+ | Fast Python linter | Extremely fast (10-100x faster than flake8); combines multiple linters; modern tooling |
 | **Build Tool** | hatch | 1.9+ | Project packaging and publishing | Modern Python build system; PEP 517/518 compliant; integrates with PyPI publishing |
 | **CI/CD** | GitHub Actions | N/A | Continuous integration | Free for public repos; matrix testing across Python versions; PyPI publishing workflow |
-| **Distribution** | PyPI | N/A | Package distribution | Python Package Index; standard for Python packages; `pip install cakemail-mcp-server` |
+| **Distribution** | PyPI | N/A | Package distribution | Python Package Index; standard for Python packages; `pip install cakemail-api-docs-mcp` |
 | **Environment Management** | python-dotenv | 1.0+ | .env file loading | Load OPENAPI_SPEC_PATH from .env; standard for configuration management |
 | **Dependency Management** | pyproject.toml | PEP 621 | Dependency specification | Modern Python standard (PEP 621); replaces setup.py; all config in one file |
 
@@ -460,7 +460,7 @@ sequenceDiagram
 ## Source Tree
 
 ```
-cakemail-mcp-server/
+cakemail-api-docs-mcp/
 ├── src/
 │   └── cakemail_mcp/
 │       ├── __init__.py
@@ -500,8 +500,8 @@ cakemail-mcp-server/
 
 **Key Design Decisions:**
 - **src/ layout:** Modern Python best practice (PEP 420); prevents accidental imports from working directory
-- **Package name:** `cakemail_mcp` (underscore for Python, installable as `cakemail-mcp-server` on PyPI)
-- **Entry point:** `__main__.py` enables `python -m cakemail_mcp` or `cakemail-mcp-server` command
+- **Package name:** `cakemail_mcp` (underscore for Python, installable as `cakemail-api-docs-mcp` on PyPI)
+- **Entry point:** `__main__.py` enables `python -m cakemail_mcp` or `cakemail-api-docs-mcp` command
 - **Flat structure:** All code in single package (no nested modules) - appropriate for small, focused project
 - **Test mirroring:** Test files mirror source files for clarity
 - **Configuration files in root:** Standard Python convention (pyproject.toml, ruff.toml, etc.)
@@ -541,7 +541,7 @@ cakemail-mcp-server/
 
 - **Development:** Local developer machines running `python -m cakemail_mcp` from source
 - **CI:** GitHub Actions runners for automated testing
-- **Production:** End-user machines after `pip install cakemail-mcp-server`
+- **Production:** End-user machines after `pip install cakemail-api-docs-mcp`
 
 **No staging environment needed** - Package testing happens via CI before PyPI publication
 

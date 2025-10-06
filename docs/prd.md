@@ -103,7 +103,7 @@ Testing focus: Ensure MCP server correctly interprets OpenAPI spec and returns a
   - `mypy` for static type checking
 - **Build Tooling:** `hatch` (modern Python build system, PEP 517/518 compliant)
 - **CI/CD:** GitHub Actions for automated testing on push/PR (run tests on Python 3.11, 3.12)
-- **Distribution:** Publish to PyPI as `cakemail-mcp-server` (installable via `pip install`)
+- **Distribution:** Publish to PyPI as `cakemail-api-docs-mcp` (installable via `pip install`)
 - **Versioning:** Follow semantic versioning (SemVer) with automated changelog generation
 
 ## Epic List
@@ -377,7 +377,7 @@ so that **I can install it with a simple `npm install` command like any other to
 4. Package has `bin` entry pointing to compiled MCP server executable
 5. README includes npm installation badge and shields.io version badge
 6. Publishing workflow uses semantic versioning (SemVer) and generates CHANGELOG.md automatically
-7. Test installation: `npm install -g @cakemail/mcp-server` works and `cakemail-mcp-server` command is available globally
+7. Test installation: `npm install -g @cakemail/mcp-server` works and `cakemail-api-docs-mcp` command is available globally
 8. Published package size is reasonable (<5MB) - excludes devDependencies and unnecessary files
 
 ### Story 3.5: Comprehensive Testing and Beta Validation

@@ -82,8 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Installation
 
 Supports multiple installation methods:
-- One-command: `claude mcp add cakemail -- uvx cakemail-mcp-server`
-- Traditional: `pip install cakemail-mcp-server`
+- One-command: `claude mcp add cakemail -- uvx cakemail-api-docs-mcp`
+- Traditional: `pip install cakemail-api-docs-mcp`
 - Development: `uv pip install -e ".[dev]"`
 
-[0.1.0]: https://github.com/cakemail/cakemail-mcp-server/releases/tag/v0.1.0
+[0.1.0]: https://github.com/cakemail/cakemail-api-docs-mcp/releases/tag/v0.1.0

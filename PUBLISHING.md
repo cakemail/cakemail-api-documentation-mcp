@@ -83,14 +83,14 @@ uv run twine upload --repository testpypi dist/*
 Then test installation:
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --no-deps cakemail-mcp-server
+pip install --index-url https://test.pypi.org/simple/ --no-deps cakemail-api-docs-mcp
 ```
 
 Test the command:
 
 ```bash
-cakemail-mcp-server --version
-cakemail-mcp-server --help
+cakemail-api-docs-mcp --version
+cakemail-api-docs-mcp --help
 ```
 
 ### Step 5: Publish to PyPI
@@ -109,7 +109,7 @@ Uploading cakemail_mcp_server-0.1.0.tar.gz
 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.2/15.2 kB • 00:00
 
 View at:
-https://pypi.org/project/cakemail-mcp-server/0.1.0/
+https://pypi.org/project/cakemail-api-docs-mcp/0.1.0/
 ```
 
 ### Step 6: Verify Installation
@@ -122,11 +122,11 @@ python3 -m venv test-env
 source test-env/bin/activate
 
 # Install from PyPI
-pip install cakemail-mcp-server
+pip install cakemail-api-docs-mcp
 
 # Test
-cakemail-mcp-server --version
-cakemail-mcp-server --help
+cakemail-api-docs-mcp --version
+cakemail-api-docs-mcp --help
 
 # Cleanup
 deactivate
@@ -136,7 +136,7 @@ rm -rf test-env
 ### Step 7: Test with Claude Code
 
 ```bash
-claude mcp add cakemail -- uvx cakemail-mcp-server
+claude mcp add cakemail -- uvx cakemail-api-docs-mcp
 ```
 
 Restart Claude Desktop and verify the 🔌 icon appears.
@@ -160,8 +160,8 @@ Go to GitHub → Releases → Draft a new release:
 Update links in README.md to point to PyPI package:
 
 ```markdown
-[![PyPI version](https://badge.fury.io/py/cakemail-mcp-server.svg)](https://pypi.org/project/cakemail-mcp-server/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/cakemail-mcp-server.svg)](https://pypi.org/project/cakemail-mcp-server/)
+[![PyPI version](https://badge.fury.io/py/cakemail-api-docs-mcp.svg)](https://pypi.org/project/cakemail-api-docs-mcp/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/cakemail-api-docs-mcp.svg)](https://pypi.org/project/cakemail-api-docs-mcp/)
 ```
 
 ### 3. Announce
@@ -229,7 +229,7 @@ For publishing issues:
 **Current Status**: ✅ Package built and validated - Ready to publish!
 
 **Package Details**:
-- Name: `cakemail-mcp-server`
+- Name: `cakemail-api-docs-mcp`
 - Version: `0.1.0`
 - Files: wheel (11KB) + source (392KB)
 - Python: >=3.11

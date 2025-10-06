@@ -24,7 +24,7 @@ The Cakemail API MCP Server provides AI coding assistants (Claude, Cursor, GitHu
 claude mcp add cakemail-api-docs -- npx cakemail-api-docs
 
 # Or using uvx (Python developers)
-claude mcp add cakemail-api-docs -- uvx cakemail-mcp-server
+claude mcp add cakemail-api-docs -- uvx cakemail-api-docs-mcp
 ```
 
 That's it! No manual configuration needed.
@@ -39,8 +39,8 @@ claude mcp add cakemail-api-docs cakemail-api-docs
 
 **Method 2: Using pip**
 ```bash
-pip install cakemail-mcp-server
-claude mcp add cakemail-api-docs cakemail-mcp-server
+pip install cakemail-api-docs-mcp
+claude mcp add cakemail-api-docs cakemail-api-docs-mcp
 ```
 
 **Method 3: From source (for development)**
@@ -71,7 +71,7 @@ If not using `claude mcp add`, edit `~/Library/Application Support/Claude/claude
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
       }
@@ -83,7 +83,7 @@ If not using `claude mcp add`, edit `~/Library/Application Support/Claude/claude
 ### Running Standalone
 
 ```bash
-cakemail-mcp-server
+cakemail-api-docs-mcp
 ```
 
 Or using Python module:
@@ -100,7 +100,7 @@ Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-mcp-server",
+      "command": "cakemail-api-docs-mcp",
       "env": {
         "OPENAPI_SPEC_PATH": "/path/to/cakemail/openapi.json"
       }
@@ -115,8 +115,8 @@ Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/
 
 ```bash
 # Clone repository
-git clone https://github.com/cakemail/cakemail-mcp-server.git
-cd cakemail-mcp-server
+git clone https://github.com/cakemail/cakemail-api-docs-mcp.git
+cd cakemail-api-docs-mcp
 
 # Install with development dependencies
 uv pip install -e .[dev]
@@ -151,6 +151,6 @@ Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING
 
 ## Support
 
-- [Documentation](https://github.com/cakemail/cakemail-mcp-server#readme)
-- [Issue Tracker](https://github.com/cakemail/cakemail-mcp-server/issues)
+- [Documentation](https://github.com/cakemail/cakemail-api-docs-mcp#readme)
+- [Issue Tracker](https://github.com/cakemail/cakemail-api-docs-mcp/issues)
 - [Cakemail API Documentation](https://docs.cakemail.com)

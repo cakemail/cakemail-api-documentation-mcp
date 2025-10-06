@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "cakemail-api-docs": {
+      "command": "python3",
+      "args": ["-m", "cakemail_mcp"],
+      "cwd": "/Users/francoislane/dev/cakemail-api-mcp"
+    }
+  }
+}
