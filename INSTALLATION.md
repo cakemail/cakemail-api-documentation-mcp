@@ -27,11 +27,6 @@ That's it! The `claude mcp add` command automatically:
 - Sets up the correct paths
 - Restarts Claude if needed
 
-**To use a custom OpenAPI spec:**
-```bash
-claude mcp add cakemail -- env OPENAPI_SPEC_PATH=/path/to/openapi.json uvx cakemail-api-docs-mcp
-```
-
 ### Alternative: Manual Installation
 
 **Step 1: Install the package**
@@ -52,10 +47,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-api-docs-mcp",
-      "env": {
-        "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
-      }
+      "command": "cakemail-api-docs-mcp"
     }
   }
 }
@@ -70,10 +62,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "cakemail": {
       "command": "uvx",
-      "args": ["cakemail-api-docs-mcp"],
-      "env": {
-        "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
-      }
+      "args": ["cakemail-api-docs-mcp"]
     }
   }
 }
@@ -112,7 +101,6 @@ uv pip install -e ".[dev]"
         "cakemail_mcp"
       ],
       "env": {
-        "OPENAPI_SPEC_PATH": "/path/to/cakemail-api-docs-mcp/openapi.json",
         "LOG_LEVEL": "DEBUG"
       }
     }
@@ -168,38 +156,9 @@ pip install cakemail-api-docs-mcp
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `OPENAPI_SPEC_PATH` | Path or URL to OpenAPI spec | `./openapi.json` |
 | `LOG_LEVEL` | Logging level (DEBUG, INFO, WARNING, ERROR) | `INFO` |
 
-### Using a Local OpenAPI Spec
-
-```json
-{
-  "mcpServers": {
-    "cakemail": {
-      "command": "cakemail-api-docs-mcp",
-      "env": {
-        "OPENAPI_SPEC_PATH": "/path/to/custom/openapi.json"
-      }
-    }
-  }
-}
-```
-
-### Using a Remote OpenAPI Spec
-
-```json
-{
-  "mcpServers": {
-    "cakemail": {
-      "command": "cakemail-api-docs-mcp",
-      "env": {
-        "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
-      }
-    }
-  }
-}
-```
+**Note:** The server includes a bundled OpenAPI spec. No additional configuration is needed for basic usage.
 
 ---
 
@@ -253,17 +212,6 @@ pip list | grep cakemail-api-docs-mcp
 If using pipx, ensure pipx is in your PATH:
 ```bash
 pipx list
-```
-
-### OpenAPI spec not loading
-
-Check the path:
-```bash
-# For local files
-ls -la /path/to/openapi.json
-
-# For URLs
-curl -I https://api.cakemail.dev/openapi.json
 ```
 
 ### Claude Desktop not connecting

@@ -71,10 +71,7 @@ If not using `claude mcp add`, edit `~/Library/Application Support/Claude/claude
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-api-docs-mcp",
-      "env": {
-        "OPENAPI_SPEC_PATH": "https://api.cakemail.dev/openapi.json"
-      }
+      "command": "cakemail-api-docs-mcp"
     }
   }
 }
@@ -100,10 +97,7 @@ Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/
 {
   "mcpServers": {
     "cakemail": {
-      "command": "cakemail-api-docs-mcp",
-      "env": {
-        "OPENAPI_SPEC_PATH": "/path/to/cakemail/openapi.json"
-      }
+      "command": "cakemail-api-docs-mcp"
     }
   }
 }
